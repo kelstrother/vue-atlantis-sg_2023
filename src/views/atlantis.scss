@@ -1,0 +1,22 @@
+:root {
+  --pegasus: 'stargate_atlantis_glyphsRg';
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.atlantis-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .stargate-component {
+    position: absolute;
+  }
+}
