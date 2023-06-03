@@ -51,10 +51,10 @@
 .chevron {
   clip-path: polygon(
     0 8%,
-    35% 0,
-    35% 10%,
-    65% 10%,
-    65% 0,
+    30% 0,
+    35% 5%,
+    65% 5%,
+    70% 0,
     100% 5%,
     100% 10%,
     70% 15%,
@@ -63,8 +63,8 @@
     30% 15%,
     0 10%
   );
-  background: #464f5a;
-  opacity: 1;
+  background: hsl(213, 13%, 30%);
+  // opacity: 1;
   position: absolute;
   z-index: 100;
   pointer-events: none;
@@ -90,7 +90,7 @@
   --sz: 4.1cqi;
   height: var(--sz);
   width: var(--sz);
-  clip-path: polygon(65% 12.5%, 55% 40%, 45% 40%, 35% 12.5%);
+  clip-path: polygon(68% 4%, 57% 38%, 43% 38%, 32% 4%);
 }
 #c-1 {
   --deg: 270deg;

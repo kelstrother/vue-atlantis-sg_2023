@@ -1,7 +1,8 @@
 <template>
   <div class="atlantis-container">
     <AddressDirectory :locations='locations' />
-    <Stargate class='stargate-component' :gateData='gateData' />
+    <!-- <Stargate class='stargate-component' :gateData='gateData' /> -->
+    <DhdDevice :gateData='gateData'/>
   </div>
 </template>
 
@@ -10,11 +11,12 @@ import './atlantis.scss'
 // @ is an alias to /src
 import AddressDirectory from '../components/AddressDirectory.vue';
 import Stargate from '../components/Stargate.vue'
+import DhdDevice from '@/components/DhdDevice.vue';
 import { ref } from 'vue';
 
 export default {
   name: 'AtlantisView',
-  components: { AddressDirectory, Stargate },
+  components: { AddressDirectory, Stargate, DhdDevice },
   setup() {
 
     const locations = ref([
@@ -91,42 +93,42 @@ export default {
     ]);
 
     const gateData = ref([
-        { letter: 'g', constellation: 'arami', active: null },
-        { letter: 't', constellation: 'olavii', active: null },
-        { letter: 'v', constellation: 'elenami', active: null },
-        { letter: 'H', constellation: 'sibbron', active: null },
-        { letter: 'r', constellation: 'hacemill', active: null },
-        { letter: 'f', constellation: 'ca po', active: null },
-        { letter: 'i', constellation: 'illume', active: null },
-        { letter: 'o', constellation: 'zamillioz', active: null },
-        { letter: 'a', constellation: 'earth', active: null },
-        { letter: 'p', constellation: 'danami', active: null },
-        { letter: 'w', constellation: 'sandovi', active: null },
-        { letter: 'x', constellation: 'dawnre', active: null },
-        { letter: 'l', constellation: 'lenchan', active: null },
-        { letter: 'd', constellation: 'amiwill', active: null },
-        { letter: 'q', constellation: 'salma', active: null },
-        { letter: 'I', constellation: 'once el', active: null },
-        { letter: 'J', constellation: 'laylox', active: null },
-        { letter: 'n', constellation: 'ecrumig', active: null },
-        { letter: 'E', constellation: 'subido', active: null },
-        { letter: 'u', constellation: 'roehi', active: null },
-        { letter: 'm', constellation: 'alura', active: null },
-        { letter: 'y', constellation: 'aldeni', active: null },
-        { letter: 'h', constellation: 'aaxel', active: null },
-        { letter: 'z', constellation: 'recktic', active: null },
-        { letter: 'k', constellation: 'avoniv', active: null },
-        { letter: 'F', constellation: 'bydo', active: null },
-        { letter: 'D', constellation: 'zeo', active: null },
-        { letter: 'A', constellation: 'poco re', active: null },
-        { letter: 'b', constellation: 'tahnan', active: null },
-        { letter: 'j', constellation: 'ramnon', active: null },
-        { letter: 'C', constellation: 'gilltin', active: null },
-        { letter: 'e', constellation: 'acjesis', active: null },
-        { letter: 'B', constellation: 'abrin', active: null },
-        { letter: 's', constellation: 'hamlinto', active: null },
-        { letter: 'c', constellation: 'setas', active: null },
-        { letter: 'G', constellation: 'robandus', active: null }
+        { index: 1, letter: 'g', constellation: 'arami', active: null },
+        { index: 2, letter: 't', constellation: 'olavii', active: null },
+        { index: 3, letter: 'v', constellation: 'elenami', active: null },
+        { index: 4, letter: 'H', constellation: 'sibbron', active: null },
+        { index: 5, letter: 'r', constellation: 'hacemill', active: null },
+        { index: 6, letter: 'f', constellation: 'ca po', active: null },
+        { index: 7, letter: 'i', constellation: 'illume', active: null },
+        { index: 8, letter: 'o', constellation: 'zamillioz', active: null },
+        { index: 9, letter: 'a', constellation: 'earth', active: null },
+        { index: 10, letter: 'p', constellation: 'danami', active: null },
+        { index: 11, letter: 'w', constellation: 'sandovi', active: null },
+        { index: 12, letter: 'x', constellation: 'dawnre', active: null },
+        { index: 13, letter: 'l', constellation: 'lenchan', active: null },
+        { index: 14, letter: 'd', constellation: 'amiwill', active: null },
+        { index: 15, letter: 'q', constellation: 'salma', active: null },
+        { index: 16, letter: 'I', constellation: 'once el', active: null },
+        { index: 17, letter: 'J', constellation: 'laylox', active: null },
+        { index: 18, letter: 'n', constellation: 'ecrumig', active: null },
+        { index: 19, letter: 'E', constellation: 'subido', active: null },
+        { index: 20, letter: 'u', constellation: 'roehi', active: null },
+        { index: 21, letter: 'm', constellation: 'alura', active: null },
+        { index: 22, letter: 'y', constellation: 'aldeni', active: null },
+        { index: 23, letter: 'h', constellation: 'aaxel', active: null },
+        { index: 24, letter: 'z', constellation: 'recktic', active: null },
+        { index: 25, letter: 'k', constellation: 'avoniv', active: null },
+        { index: 26, letter: 'F', constellation: 'bydo', active: null },
+        { index: 27, letter: 'D', constellation: 'zeo', active: null },
+        { index: 28, letter: 'A', constellation: 'poco re', active: null },
+        { index: 29, letter: 'b', constellation: 'tahnan', active: null },
+        { index: 30, letter: 'j', constellation: 'ramnon', active: null },
+        { index: 31, letter: 'C', constellation: 'gilltin', active: null },
+        { index: 32, letter: 'e', constellation: 'acjesis', active: null },
+        { index: 33, letter: 'B', constellation: 'abrin', active: null },
+        { index: 34, letter: 's', constellation: 'hamlinto', active: null },
+        { index: 35, letter: 'c', constellation: 'setas', active: null },
+        { index: 36, letter: 'G', constellation: 'robandus', active: null }
     ])
     
     return { locations, gateData };

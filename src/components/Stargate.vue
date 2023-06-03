@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import './stargate.css'
+import './stargate.scss'
 export default {
   name: 'Stargate',
   props: ['gateData'],
