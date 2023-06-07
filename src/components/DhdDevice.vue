@@ -1,7 +1,8 @@
 <template>
   <div class="dhd-wrapper">
-    <div @click='dialSymbol' class="dhd-console">
-    <!-- //~ //////////////////
+    <div @click="dialSymbol" class="dhd-console">
+    <!-- <div @click="$emit('dialSymbol')" class="dhd-console"> -->
+      <!-- //~ //////////////////
     //!     ROW 1       \\
     //~ ////////////////// -->
       <div id="row-1" class="row">
@@ -144,11 +145,9 @@
           <p class="dhd-symbol">{{ gateData[15].letter }}</p>
         </div>
         <div
-          class="dial"
+          class= "engage-dial"
           ref="engageDial"
           @click="engage"
-          :data-symbol="engage"
-          id="engage"
         ></div>
         <div
           :ref="(el) => setSymbolRef(el, index)"
@@ -332,21 +331,35 @@ import { ref } from 'vue';
 export default {
   name: 'DhdDevice',
   props: ['gateData'],
+  emits: ['dialSymbol'],
   setup() {
-    const engageDial = ref(null)
+    const engageDial = ref(null);
     let isActive = ref(false);
     let symbols = [];
-    let stargateAddress = []
+    let stargateAddress = [];
+
+    defineExpose({ engageDial, isActive, symbols, stargateAddress });
+
+
+    // const emit = defineEmits(['dialSymbol']);
+ 
+    function dialSymbol(e) {
+      symbols.push(dialed)
+      console.log('symbols arr: ', symbols);
+    }
+
 
     function dialSymbol(e) {
       let dialed = e.target;
       for (let i = 0; i < symbols.length; i++) {
-        if(dialed.dataset.symbol === symbols[i].dataset.symbol) {
+        const symbol = dialed.firstElementChild;
+        if (dialed.dataset.symbol === symbols[i].dataset.symbol && !symbol.classList.contains('active')) {
+          console.log(symbol);
           stargateAddress.push(dialed);
           dialed.style.border = '2px groove hsl(191, 87%, 47%)';
-          dialed.firstElementChild.classList.add('active')
+          dialed.firstElementChild.classList.add('active');
           if (stargateAddress.length === 7) {
-          engageDial.value.classList.add('engage-active');
+            engageDial.value.classList.add('engage-active');
           }
         }
       }
@@ -357,9 +370,9 @@ export default {
         symbols.push(el);
         return;
       }
-    }
+    };
 
-    return { isActive, dialSymbol, symbols, setSymbolRef, stargateAddress };
+    return { isActive, setSymbolRef, engageDial, dialSymbol };
   },
 };
 </script>

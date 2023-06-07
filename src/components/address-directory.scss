@@ -12,7 +12,6 @@
     position: absolute;
     opacity: 1;
     left: 1rem;
-    /* display: none; */
     top: 0;
     width: 60vmin;
     height: fit-content;
@@ -33,13 +32,36 @@
       }
     }
   }
-  .show-directory {
-    padding: 1rem 2rem;
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     position: absolute;
-    top: 1rem;
+    top: 1.5rem;
     right: 10%;
-    width: fit-content;
-    height: min-content;
+    button {
+      padding: 1rem 2rem;
+      width: max-content;
+      height: min-content;
+      background: transparent;
+      border: 1px solid rgb(56, 190, 195);
+      border-radius: 7px;
+      color: rgb(56, 190, 195);
+    }
+    .translate-btn {
+      margin-block-start: 1rem;
+    }
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
   }
   .d-enter-active,
   .d-leave-active {
@@ -48,6 +70,15 @@
   .d-enter-from,
   .d-leave-to {
     transform: translateX(-200%);
+    opacity: 0;
+  }
+  .b-enter-active,
+  .b-leave-active {
+    transition: all .5s ease-in-out;
+  }
+  .b-enter-from,
+  .b-leave-to {
+    transform: translateY(-200%);
     opacity: 0;
   }
 }

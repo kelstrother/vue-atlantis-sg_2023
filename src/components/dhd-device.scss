@@ -52,23 +52,45 @@
     }
   }
 }
-#engage {
-  background: hsl(31, 78%, 24%);
+.engage-dial {
+  background: hsl(31, 78%, 13%);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  height: 80%;
+  margin-inline: -1rem;
+  aspect-ratio: 1;
+  pointer-events: none;
 }
 .engage-active {
-  // rotate: 1turn;
-  // transition: all .5s ease-in;
+  background: hsl(31, 78%, 23%);
+   background: radial-gradient(
+      circle at top,
+      hsl(31, 78%, 20%) 9.2%,
+      hsl(31, 78%, 25%) 103.9%
+    );
   animation: pulse 1s ease infinite;
+  cursor: pointer;
+  transition: all .5s ease-in;
 }
-#engage::before {
+.engage-active::after {
+  transition: all .5s ease-in;
   content: '';
   position: absolute;
   z-index: 100;
-  height: 49%;
+  height: 45%;
+  aspect-ratio: 10 / 9;
+  background: rgb(12, 147, 177);
+  bottom: 3px;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.engage-dial::before {
+  content: '';
+  position: absolute;
+  z-index: 100;
+  height: 50%;
   aspect-ratio: 10 / 9;
   background: rgba(0, 0, 0, 0.4);
   clip-path: polygon(50% 100%, 0 0, 100% 0);
