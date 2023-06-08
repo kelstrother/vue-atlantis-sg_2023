@@ -1,8 +1,12 @@
 <template>
   <div class="atlantis-container">
     <AddressDirectory :locations="locations" />
-    <Stargate ref="gate" class="stargate-component" :gateData="gateData" />
-    <!-- <DhdDevice @dialSymbol='dialSymbol' ref='dhd' class='dhd-component' :gateData='gateData'/> -->
+    <Stargate
+      ref="gate"
+      class="stargate-component"
+      :gateData="gateData"
+      :engagedSymbol="engagedSymbol"
+    />
     <DhdComponent
       @click="dialSymbol"
       ref="dhd"
@@ -14,48 +18,108 @@
 
 <script>
 import './atlantis.scss';
-// @ is an alias to /src
 import AddressDirectory from '../components/AddressDirectory.vue';
 import Stargate from '../components/Stargate.vue';
-import DhdDevice from '@/components/DhdDevice.vue';
 import DhdComponent from '@/components/DhdComponent.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, h, watch } from 'vue';
 
 export default {
   name: 'AtlantisView',
-  components: { AddressDirectory, Stargate, DhdDevice, DhdComponent },
-  // emits: ['dialSymbol'],
+  components: { AddressDirectory, Stargate, DhdComponent },
   setup() {
     let gateSymbol;
     const dhd = ref(null);
     const gate = ref(null);
-    // onMounted(() => {
-    //   for (let i = 0; i < dhd.value.symbols.length; i++) {
-    //     let dial = dhd.value.symbols[i];
-    //     let gateSymbol = gate.value.symbolsContainer[i];
-    //   }
-    // });
+    let dialed;
+    let engagedSymbol = [];
+    let index = 0;
 
     function dialSymbol(e) {
-      let dialed = e.target;
+      index++;
+      dialed = e.target;
+      console.log(index);
       for (let i = 0; i < dhd.value.symbols.length; i++) {
         gateSymbol = gate.value.symbols[i];
-        // console.log(gateSymbol);
         let dials = dhd.value.symbols[i];
         const symbol = dialed.firstElementChild;
         if (
           gateSymbol.innerText === symbol.innerText &&
           !symbol.classList.contains('active')
         ) {
-          dhd.value.stargateAddress.push(symbol);
-          gateSymbol.classList.add('active');
+          reserveSpot();
+          gate.value.locked = true;
+          spinGate();
+          engagedSymbol.push(symbol);
+          gate.value.trigger = symbol;
           dialed.style.border = '2px groove hsl(191, 87%, 47%)';
           dialed.firstElementChild.classList.add('active');
           if (dhd.value.stargateAddress.length === 7) {
+            dials.classList.remove('active');
+            index = 0;
             dhd.value.engageDial.classList.add('engage-active');
           }
         }
       }
+    }
+
+    const reserveSpot = () => {
+      if (index === 1) {
+        gate.value.symbols[0].classList.add('hide');
+        setTimeout(() => {
+          gate.value.ic1.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 2) {
+        gate.value.symbols[4].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic2.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 3) {
+        gate.value.symbols[8].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic3.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 4) {
+        gate.value.symbols[12].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic4.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 5) {
+        gate.value.symbols[24].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic5.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 6) {
+        gate.value.symbols[28].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic6.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+      if (index === 7) {
+        gate.value.symbols[32].classList.add('hide');
+         setTimeout(() => {
+          gate.value.ic7.style.background = 'hsl(191, 87%, 47%)';
+        }, 1250);
+      }
+    };
+
+    function spinGate() {
+      gate.value.engaged = true;
+      if (gate.value.engaged) {
+        gate.value.symbols.forEach((symbol) => {
+          symbol.style.opacity = '0.5';
+        });
+      }
+      setTimeout(() => {
+        gate.value.engaged = false;
+        gate.value.symbols.forEach((symbol) => {
+          symbol.style.opacity = '1';
+        });
+      }, 1250);
     }
 
     const locations = ref([
@@ -170,7 +234,15 @@ export default {
       { index: 36, letter: 'G', constellation: 'robandus', active: null },
     ]);
 
-    return { locations, gateData, dhd, gate, dialSymbol };
+    return {
+      locations,
+      gateData,
+      dhd,
+      gate,
+      dialSymbol,
+      spinGate,
+      engagedSymbol,
+    };
   },
 };
 </script>

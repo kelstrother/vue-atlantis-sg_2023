@@ -25,6 +25,83 @@
 #spinning-gate {
   background: radial-gradient(circle, #29323c 61%, #566371) 100%;
 }
+#engaged-gate {
+  // background: transparent;
+  z-index: 100;
+}
+.engaged-chevron {
+  background: hsl(198, 39%, 52%);
+}
+#engaged-symbol {
+  z-index: 200;
+}
+#engaged-container:nth-of-type(1) {
+  --d: 270deg;
+}
+#engaged-container:nth-of-type(2) {
+  --d: 310deg;
+}
+#engaged-container:nth-of-type(3) {
+  --d: 350deg;
+}
+#engaged-container:nth-of-type(4) {
+  --d: 30deg;
+}
+#engaged-container:nth-of-type(5) {
+  --d: 149.25deg;
+}
+#engaged-container:nth-of-type(6) {
+  --d: 189.5deg;
+}
+#engaged-container:nth-of-type(7) {
+  --d: 229.75deg;
+}
+#engaged-symbol:nth-of-type(1) {
+  --d: 270deg;
+}
+#engaged-symbol:nth-of-type(2) {
+  --d: 310deg;
+}
+#engaged-symbol:nth-of-type(3) {
+  --d: 350deg;
+}
+#engaged-symbol:nth-of-type(4) {
+  --d: 30deg;
+}
+#engaged-symbol:nth-of-type(5) {
+  --d: 149.25deg;
+}
+#engaged-symbol:nth-of-type(6) {
+  --d: 189.5deg;
+}
+#engaged-symbol:nth-of-type(7) {
+  --d: 229.75deg;
+}
+.hide {
+  display: none;
+}
+.spin {
+  animation: spinGate 1.2s ease-in forwards;
+}
+@keyframes spinGate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.active {
+  animation: appear 1s ease forwards;
+}
 .symbol-container {
   z-index: 100;
   --gsX: calc(var(--r) + ((var(--r)) * cos(var(--d))));
@@ -64,7 +141,6 @@
     0 10%
   );
   background: hsl(213, 13%, 30%);
-  // opacity: 1;
   position: absolute;
   z-index: 100;
   pointer-events: none;

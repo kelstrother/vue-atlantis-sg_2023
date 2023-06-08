@@ -1,6 +1,6 @@
 <template>
   <div class="dhd-wrapper">
-    <div @click="$emit('dialSymbol')" class="dhd-console">
+    <div class="dhd-console">
       <!-- //~ //////////////////
     //!     ROW 1       \\
     //~ ////////////////// -->
@@ -396,7 +396,7 @@ import './dhd-device.scss';
 import { reactive, ref, watchEffect } from 'vue';
 
 const props = defineProps(['gateData']);
-const emit = defineEmits(['dialSymbol']);
+// const emit = defineEmits(['dialSymbol']);
 const engageDial = ref(null);
 let isActive = ref(false);
 let symbolsContainer = [];
@@ -423,22 +423,4 @@ const setSymbolRef = (el, index) => {
     symbols.push(el);
   }
 };
-
-// function dialSymbol(e) {
-//   let dialed = e.target;
-//   for (let i = 0; i < symbols.length; i++) {
-//     let dials = symbols[i];
-//     const symbol = dialed.firstElementChild;
-//     if (
-//       symbol.innerText === dials.innerText && !symbol.classList.contains('active')
-//     ) {
-//       stargateAddress.push(symbol);
-//       dialed.style.border = '2px groove hsl(191, 87%, 47%)';
-//       dialed.firstElementChild.classList.add('active');
-//       if (stargateAddress.length === 7) {
-//         engageDial.value.classList.add('engage-active');
-//       }
-//     }
-//   }
-// }
 </script>
